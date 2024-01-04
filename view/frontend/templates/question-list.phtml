@@ -1,0 +1,19 @@
+<?php
+
+use Magebit\Faq\Block\FaqList;
+use Magebit\Faq\Api\Data\FaqInterface;
+
+/** @var FaqList $block */
+/** @var FaqInterface[] $data */
+
+$data = $block->getAllItems();
+
+?>
+<h1>Frequently Asked Questions</h1>
+
+<ul>
+    <?php foreach ($data as $questions):?>
+        <li class="question"><?= $questions->getQuestion()?></li>
+        <p class="answer"><?= $questions->getAnswer()?></p>
+    <?php endforeach;?>
+</ul>
