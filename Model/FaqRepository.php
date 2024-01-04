@@ -13,12 +13,10 @@ use Magebit\Faq\Api\{
     Data\FaqInterface,
     FaqRepositoryInterface
 };
-use Magento\Framework\Api\SearchResultsInterface;
-use Magebit\Faq\Model\FaqFactory;
+
 use Magebit\Faq\Model\ResourceModel\Faq as FaqResource;
 use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
-use Magento\TestFramework\Inspection\Exception;
 
 class FaqRepository implements FaqRepositoryInterface
 {
@@ -68,7 +66,6 @@ class FaqRepository implements FaqRepositoryInterface
      *
      * @return void
      *
-     * @throws AlreadyExistsException
      * */
     public function save(FaqInterface $faq): void
     {

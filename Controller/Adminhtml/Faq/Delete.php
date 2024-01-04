@@ -30,6 +30,7 @@ class Delete extends Action
     /**
      * @param Context $context
      * @param FaqRepository $faqFactory
+     * @param RedirectFactory $resultRedirectFactory
      */
     public function __construct(
         Context $context,
@@ -44,9 +45,9 @@ class Delete extends Action
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
-        $this->faqRepository->deleteById($id);
+        $this->faqRepository->deleteById(intval($id));
         $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath('magebit_faq/faq/index');
+        $redirect->setPath('magebitfaq/faq/index');
         return $redirect;
     }
 }

@@ -30,13 +30,19 @@ class Save extends Action implements HttpPostActionInterface
     private FaqRepository $faqRepository;
 
     /**
+     * @var FaqInterface $faq
+     */
+    private FaqInterface $faq;
+
+    /**
      * @param Context $context
      * @param FaqFactory $modelFactory
      * @param FaqRepository $faqRepository
      */
     public function __construct(
-        Context $context, FaqFactory $modelFactory,
-        FaqRepository $faqRepository
+        Context $context,
+        FaqFactory $modelFactory,
+        FaqRepository $faqRepository,
     ) {
         parent::__construct($context);
         $this->modelFactory = $modelFactory;
@@ -47,11 +53,33 @@ class Save extends Action implements HttpPostActionInterface
     {
         $product = $this->modelFactory->create();
         $resultRedirect = $this->resultRedirectFactory->create();
+
+        if($this->getRequest()->getParam('id') != null){
+            $this->edit($this->getRequest()->getParams());
+        }
+
         $product->setQuestion($this->getRequest()->getParam('question'));
         $product->setAnswer($this->getRequest()->getParam('answer'));
         $product->setStatus(intval($this->getRequest()->getParam('status')));
         $product->setPosition(1);
         $this->faqRepository->save($product);
+        $resultRedirect->setPath('magebitfaq/faq/index');
+        return $resultRedirect;
+    }
+
+    /**
+     * @param array $data
+     * @return \Magento\Framework\Controller\Result\Redirect
+     */
+    public function edit(array $data)
+    {
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $this->faq = $this->faqRepository->get(intval($data['id']));
+        $this->faq->setPosition(intval($data['position']));
+        $this->faq->setStatus(intval($data['status']));
+        $this->faq->setQuestion($data['question']);
+        $this->faq->setAnswer($data['answer']);
+        $this->faqRepository->save($this->faq);
         $resultRedirect->setPath('magebitfaq/faq/index');
         return $resultRedirect;
     }

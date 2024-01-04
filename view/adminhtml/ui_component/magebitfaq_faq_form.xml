@@ -12,7 +12,7 @@
             <button name="save" class="Magebit\Faq\Block\SaveButton"/>
             <button name="back" class="Magebit\Faq\Block\BackButton"/>
         </buttons>
-        <namespace>magebit_faq_form</namespace>
+        <namespace>magebitfaq_faq_form</namespace>
         <dataScope>data</dataScope>
         <deps>
             <dep>magebitfaq_faq_form.magebitfaq_faq_form_data_source</dep>
@@ -25,7 +25,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="magebit_faq/faq/save"/>
+            <submitUrl path="magebitfaq/faq/save"/>
         </settings>
         <aclResource>Magento_Customer::manage</aclResource>
         <dataProvider class="Magebit\Faq\Model\Question\DataProvider" name="magebitfaq_faq_form_data_source">

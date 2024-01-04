@@ -56,8 +56,8 @@ class InlineEdit extends Action implements HttpPostActionInterface
         foreach (array_keys($postItems) as $faqId){
             $this->faq = $this->faqRepository->get($faqId);
             $this->faq->setQuestion($postItems[$faqId]['question']);
-            $this->faq->setStatus($postItems[$faqId]['status']);
-            $this->faq->setPosition($postItems[$faqId]['position']);
+            $this->faq->setStatus(intval($postItems[$faqId]['status']));
+            $this->faq->setPosition(intval($postItems[$faqId]['position']));
             $this->faqRepository->save($this->faq);
         }
         return $resultJson->setData(

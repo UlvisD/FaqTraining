@@ -79,7 +79,7 @@
         <settings>
             <editorConfig>
                 <param name="clientConfig" xsi:type="array">
-                    <item name="saveUrl" xsi:type="url" path="magebit_faq/faq/InlineEdit"/>
+                    <item name="saveUrl" xsi:type="url" path="magebitfaq/faq/inlineedit"/>
                     <item name="validateBeforeSave" xsi:type="boolean">false</item>
                 </param>
                 <param name="indexField" xsi:type="string">id</param>
