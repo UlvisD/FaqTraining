@@ -16,7 +16,6 @@ use Magebit\Faq\Api\{
 
 use Magebit\Faq\Model\ResourceModel\Faq as FaqResource;
 use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory;
-use Magento\Framework\Exception\AlreadyExistsException;
 
 class FaqRepository implements FaqRepositoryInterface
 {
