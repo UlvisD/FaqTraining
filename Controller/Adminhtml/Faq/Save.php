@@ -45,42 +45,31 @@ class Save extends Action implements HttpPostActionInterface
         FaqRepository $faqRepository,
     ) {
         parent::__construct($context);
+
         $this->modelFactory = $modelFactory;
         $this->faqRepository = $faqRepository;
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
-        $product = $this->modelFactory->create();
-        $resultRedirect = $this->resultRedirectFactory->create();
+        $postParams = $this->getRequest()->getParams();
 
-        if($this->getRequest()->getParam('id') != null){
-            $this->edit($this->getRequest()->getParams());
+        if($postParams['id'] != null){
+            $faq = $this->faqRepository->get((int)$postParams['id']);
+        } else {
+            $faq = $this->modelFactory->create();
         }
 
-        $product->setQuestion($this->getRequest()->getParam('question'));
-        $product->setAnswer($this->getRequest()->getParam('answer'));
-        $product->setStatus(intval($this->getRequest()->getParam('status')));
-        $product->setPosition(1);
-        $this->faqRepository->save($product);
-        $resultRedirect->setPath('magebitfaq/faq/index');
-        return $resultRedirect;
-    }
+        $faq->setQuestion($postParams['question']);
+        $faq->setAnswer($postParams['answer']);
+        $faq->setStatus((int)$postParams['status']);
+        $faq->setPosition((int)$postParams['position']);
+        $this->faqRepository->save($faq);
 
-    /**
-     * @param array $data
-     * @return \Magento\Framework\Controller\Result\Redirect
-     */
-    public function edit(array $data)
-    {
-        $resultRedirect = $this->resultRedirectFactory->create();
-        $this->faq = $this->faqRepository->get(intval($data['id']));
-        $this->faq->setPosition(intval($data['position']));
-        $this->faq->setStatus(intval($data['status']));
-        $this->faq->setQuestion($data['question']);
-        $this->faq->setAnswer($data['answer']);
-        $this->faqRepository->save($this->faq);
-        $resultRedirect->setPath('magebitfaq/faq/index');
-        return $resultRedirect;
+        return $this->resultRedirectFactory->create()->setPath('magebitfaq/faq/index');
     }
 }
+
