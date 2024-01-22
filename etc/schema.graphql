@@ -1,0 +1,11 @@
+type FaqEntities {
+    id: Int
+    question: String
+    answer: String
+    position: Int
+    status: Int
+}
+
+type Query {
+    faqEntities: [FaqEntities]
+}

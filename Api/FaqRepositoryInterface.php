@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Magebit\Faq\Api;
 
 use Magebit\Faq\Api\Data\FaqInterface;
-use Magento\Framework\Api\SearchResultsInterface;
 
 interface FaqRepositoryInterface
 {
@@ -48,4 +47,9 @@ interface FaqRepositoryInterface
      * @return void
      * */
     public function deleteById(int $id): void;
+
+    /**
+     * @return string[] | string
+     */
+    public function getJson(): array | string;
 }

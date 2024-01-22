@@ -50,7 +50,7 @@ class FaqRepository implements FaqRepositoryInterface
      * Get a single row
      * @param int $id
      *
-     * @return FaqInterface
+     * @return FaqInterface | null
      * */
     public function get(int $id): FaqInterface
     {
@@ -112,5 +112,27 @@ class FaqRepository implements FaqRepositoryInterface
         $faq = $this->faqFactory->create();
         $this->faqResource->load($faq, $id);
         $this->faqResource->delete($faq);
+    }
+
+    /**
+     * Returns json data for API
+     *
+     * @return string | string[]
+     */
+    public function getJson(): string | array
+    {
+        if(array_keys(self::getList())){
+            foreach(self::getList() as $data){
+                $json[] = [
+                    "id" => $data->getId(),
+                    "question" => $data->getQuestion(),
+                    "answer" => $data->getAnswer(),
+                    "status" => $data->getStatus(),
+                    "position" => $data->getPosition(),
+                ];
+            }
+            return $json;
+        }
+        return [];
     }
 }

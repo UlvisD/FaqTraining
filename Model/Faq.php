@@ -38,8 +38,11 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Set question
      * @param string $question
      * @return void
+     *
      */
     public function setQuestion(string $question): void
     {
@@ -47,7 +50,10 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Get answer
      * @return string
+     *
      */
     public function getAnswer(): string
     {
@@ -55,8 +61,11 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Set answer
      * @param string $answer
      * @return void
+     *
      */
     public function setAnswer(string $answer): void
     {
@@ -64,16 +73,22 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Get status
      * @return int
+     *
      */
     public function getStatus(): int
     {
-        return $this->getData(self::STATUS);
+        return (int) $this->getData(self::STATUS);
     }
 
     /**
+     *
+     * Set status
      * @param int $status
      * @return void
+     *
      */
     public function setStatus(int $status): void
     {
@@ -81,16 +96,22 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Get position
      * @return int
+     *
      */
     public function getPosition(): int
     {
-        return $this->getData(self::POSITION);
+        return (int) $this->getData(self::POSITION);
     }
 
     /**
+     *
+     * Set position
      * @param int $position
      * @return void
+     *
      */
     public function setPosition(int $position): void
     {
@@ -98,7 +119,10 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Get updatedAt time
      * @return string
+     *
      */
     public function getUpdatedAt(): string
     {
@@ -106,13 +130,14 @@ class Faq extends AbstractModel implements FaqInterface
     }
 
     /**
+     *
+     * Set updatedAt time
      * @param string | null $time
      * @return void
+     *
      */
     public function setUpdatedAt(string | null $time): void
     {
         $this->setData(self::UPDATED_AT, $time);
     }
-
-
 }

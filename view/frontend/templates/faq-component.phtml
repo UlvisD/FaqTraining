@@ -1,0 +1,17 @@
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "faq-data": {
+                        "component": "Magebit_Faq/js/faq-component",
+                        "template": "Magebit_Faq/faq-component-tpl.html"
+                    }
+                }
+            }
+        }
+    }
+</script>
+<div id="component" data-bind="scope: 'faq-data'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
