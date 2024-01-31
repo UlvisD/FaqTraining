@@ -14,6 +14,8 @@ use Magebit\Faq\Model\ResourceModel\Faq\CollectionFactory;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use function _PHPStan_532094bc1\assertArgs;
+use function PHPStan\Testing\assertType;
 
 class FaqRepositoryTest extends TestCase
 {
@@ -71,5 +73,24 @@ class FaqRepositoryTest extends TestCase
         $decoded = json_decode($jsonData, true);
 
         $this->assertArrayHasKey("id", $decoded, "Does not have the key");
+    }
+
+    public function testReturnItemsFromColletion()
+    {
+        $items = $this->object->getList();
+        $this->assertIsArray($items, "Method does not return an array");
+    }
+
+    public function testDeletesEntity(){
+        $items = $this->object->getList();
+
+        if(empty($items)){
+            $this->assertIsArray($items, "There is no entities inside of the collection");
+        }
+
+        $testId = $items[0]->getId();
+        $this->faqRepositoryInterfaceMock->deleteById($testId);
+
+        $this->assertNull($testId, "The item was not deleted by id.");
     }
 }
